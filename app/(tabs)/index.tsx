@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "expo-router";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import MovieCard from "@/components/movieCard";
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { Image } from "react-native";
 import logo from "../../assets/images/logo.jpeg";
 import SearchBar from "@/components/searchfile";
@@ -46,8 +52,8 @@ export default function Index() {
         <Text>Error:{error}</Text>
       ) : (
         <View className="flex-1 mt-5">
-          <SearchBar 
-            onPress={() => router.push("/search")}
+          <SearchBar
+            onPress={() =>  router.push("/search")}
             placeholder="Search for a movies"
           />
 
@@ -55,6 +61,28 @@ export default function Index() {
             <Text className="text-lg ml-5 text-white font-bold  mb-3">
               Latest Movies
             </Text>
+
+            <FlatList
+              data={movies}
+              renderItem={({ item }) => (
+                <MovieCard
+                  id={item.id}
+                  poster_path={item.poster_path}
+                  title={item.title}
+                  vote_average={item.vote_average}
+                  release_date={item.release_date}
+                />
+              )}
+              keyExtractor={(item) => item.id.toString()}
+              numColumns={3}
+              columnWrapperStyle={{
+                justifyContent: "flex-start",
+                gap: 20,
+                paddingRight: 5,
+                marginBottom: 10,
+              }}
+              className="mt-2 mx-3  pb-32"
+            />
           </>
         </View>
       )}
