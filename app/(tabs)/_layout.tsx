@@ -6,7 +6,23 @@ import { Assets } from "@react-navigation/elements";
 
 const _layout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: "#0f0d23",
+          borderRadius: 15,
+          marginHorizontal: 15,
+          marginBottom: 32,
+          height: 50,
+
+          position: "absolute",
+          overflow: "hidden",
+          borderWidth: 1,
+          borderColor: "#0f0d23",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
